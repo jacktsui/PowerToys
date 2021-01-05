@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ColorCode</RootNamespace>
+    <AssemblyName>ColorCode.HTML</AssemblyName>
+    <Title>ColorCode.HTML</Title>
+    <Description>Contains the HtmlFormatter, and the HtmlClassFormatter, for rendering Html from the Colorized Code.</Description>
+    <PackageTags>ColorCode Syntax Highlighting SyntaxHighlighting HTML SyntaxToHTML HTMLFormatting Formatting</PackageTags>
+    <DocumentationFile>$(SolutionDir)$(Platform)\$(Configuration)\modules\FileExplorerPreview\CodeFilePreviewPaneDocumentation.xml</DocumentationFile>
+    <OutputPath>$(SolutionDir)$(Platform)\$(Configuration)\modules\FileExplorerPreview\</OutputPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\Version.props" />
+  <ItemGroup>
+    <ProjectReference Include="..\ColorCode.Core\ColorCode.Core.csproj" />
+  </ItemGroup>
+
+</Project>

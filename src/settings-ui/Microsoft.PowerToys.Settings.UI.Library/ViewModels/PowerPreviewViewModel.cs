@@ -49,10 +49,12 @@ namespace Microsoft.PowerToys.Settings.UI.Library.ViewModels
             _svgRenderIsEnabled = Settings.Properties.EnableSvgPreview;
             _svgThumbnailIsEnabled = Settings.Properties.EnableSvgThumbnail;
             _mdRenderIsEnabled = Settings.Properties.EnableMdPreview;
+            _cfRenderIsEnabled = Settings.Properties.EnableCfPreview;
         }
 
         private bool _svgRenderIsEnabled;
         private bool _mdRenderIsEnabled;
+        private bool _cfRenderIsEnabled;
         private bool _svgThumbnailIsEnabled;
 
         public bool SVGRenderIsEnabled
@@ -104,6 +106,24 @@ namespace Microsoft.PowerToys.Settings.UI.Library.ViewModels
                 {
                     _mdRenderIsEnabled = value;
                     Settings.Properties.EnableMdPreview = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public bool CFRenderIsEnabled
+        {
+            get
+            {
+                return _cfRenderIsEnabled;
+            }
+
+            set
+            {
+                if (value != _cfRenderIsEnabled)
+                {
+                    _cfRenderIsEnabled = value;
+                    Settings.Properties.EnableCfPreview = value;
                     RaisePropertyChanged();
                 }
             }

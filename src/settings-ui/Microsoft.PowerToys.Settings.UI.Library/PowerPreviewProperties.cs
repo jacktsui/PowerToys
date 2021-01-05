@@ -63,6 +63,23 @@ namespace Microsoft.PowerToys.Settings.UI.Library
             }
         }
 
+        private bool enableCfPreview = true;
+
+        [JsonPropertyName("cf-previewer-toggle-setting")]
+        [JsonConverter(typeof(BoolPropertyJsonConverter))]
+        public bool EnableCfPreview
+        {
+            get => enableCfPreview;
+            set
+            {
+                if (value != enableCfPreview)
+                {
+                    LogTelemetryEvent(value);
+                    enableCfPreview = value;
+                }
+            }
+        }
+
         public PowerPreviewProperties()
         {
         }

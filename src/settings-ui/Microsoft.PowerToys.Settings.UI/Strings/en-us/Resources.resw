@@ -876,4 +876,8 @@
   <data name="ColorPicker_ShowColorName.Content" xml:space="preserve">
     <value>Show color name</value>
   </data>
+  <data name="FileExplorerPreview_ToggleSwitch_Preview_CF.Header" xml:space="preserve">
+    <value>Enable Code File highlight preview</value>
+    <comment>Do you want this feature on / off</comment>
+  </data>
 </root>

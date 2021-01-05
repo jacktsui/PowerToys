@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Platforms>x64</Platforms>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ColorCode</RootNamespace>
+    <AssemblyName>ColorCode.Core</AssemblyName>
+    <Title>ColorCode-Universal</Title>
+    <Description>The Core Library, containing the Parser, and the classes to create your own formatter.</Description>
+    <PackageTags>ColorCode Syntax Highlighting SyntaxHighlighting Formatting</PackageTags>
+    <DocumentationFile>$(SolutionDir)$(Platform)\$(Configuration)\modules\FileExplorerPreview\CodeFilePreviewPaneDocumentation.xml</DocumentationFile>
+    <OutputPath>$(SolutionDir)$(Platform)\$(Configuration)\modules\FileExplorerPreview\</OutputPath>
+  </PropertyGroup>
+  <Import Project="..\..\..\Version.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  </PropertyGroup>
+</Project>
