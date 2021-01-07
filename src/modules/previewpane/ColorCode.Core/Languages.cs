@@ -41,6 +41,7 @@ namespace ColorCode
             Load<Cpp>();
             Load<Java>();
             Load<PowerShell>();
+            Load<Python>();
             Load<Typescript>();
             Load<FSharp>();
             Load<Koka>();
@@ -145,6 +146,15 @@ namespace ColorCode
         public static ILanguage PowerShell
         {
             get { return LanguageRepository.FindById(LanguageId.PowerShell); }
+        }
+
+        /// <summary>
+        /// Language support for Python
+        /// </summary>
+        /// <value>Language support for Python.</value>
+        public static ILanguage Python
+        {
+            get { return LanguageRepository.FindById(LanguageId.Python); }
         }
 
         /// <summary>

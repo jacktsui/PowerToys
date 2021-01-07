@@ -301,6 +301,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Telemetry", "Telemetry", "{
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeFilePreviewHandler", "src\modules\previewpane\CodeFilePreviewHandler\CodeFilePreviewHandler.csproj", "{5A4F5BC3-5BB6-44EF-9CBC-CC3B2D7D0156}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3D276AC2-9BBD-4CDE-9CAA-387231DE65E3} = {3D276AC2-9BBD-4CDE-9CAA-387231DE65E3}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorCode.HTML", "src\modules\previewpane\ColorCode.HTML\ColorCode.HTML.csproj", "{C97370FC-4927-48EC-83A7-2AD19455E0E3}"
 EndProject
@@ -776,8 +779,8 @@ Global
 		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Debug|x64.Build.0 = Debug|Any CPU
 		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Release|x64.ActiveCfg = Release|Any CPU
-		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Release|x64.Build.0 = Release|Any CPU
+		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Release|x64.ActiveCfg = Release|x64
+		{C97370FC-4927-48EC-83A7-2AD19455E0E3}.Release|x64.Build.0 = Release|x64
 		{3D276AC2-9BBD-4CDE-9CAA-387231DE65E3}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{3D276AC2-9BBD-4CDE-9CAA-387231DE65E3}.Debug|x64.ActiveCfg = Debug|x64
 		{3D276AC2-9BBD-4CDE-9CAA-387231DE65E3}.Debug|x64.Build.0 = Debug|x64

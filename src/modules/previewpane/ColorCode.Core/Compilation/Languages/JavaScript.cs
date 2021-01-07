@@ -49,6 +49,12 @@ namespace ColorCode.Compilation.Languages
                                            { 1, ScopeName.Comment },
                                        }),
                                new LanguageRule(
+                                   @"(""[^\n]*?"")\s*:",
+                                   new Dictionary<int, string>
+                                       {
+                                           { 1, ScopeName.Attribute },
+                                       }),
+                               new LanguageRule(
                                    @"'[^\n]*?'",
                                    new Dictionary<int, string>
                                        {

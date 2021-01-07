@@ -19,6 +19,7 @@ namespace ColorCode.Common
         public const string TypeScript = "typescript";
         public const string Php = "php";
         public const string PowerShell = "powershell";
+        public const string Python = "python";
         public const string Sql = "sql";
         public const string VbDotNet = "vb.net";
         public const string Xml = "xml";

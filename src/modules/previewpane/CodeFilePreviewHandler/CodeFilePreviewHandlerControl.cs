@@ -6,6 +6,7 @@ using System;
 using System.Drawing;
 using System.IO.Abstractions;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Windows.Forms;
 using ColorCode;
 using Common;
@@ -22,19 +23,18 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
     public class CodeFilePreviewHandlerControl : FormHandlerControl
     {
         private static readonly IFileSystem FileSystem = new FileSystem();
-
-        // private static readonly IPath Path = FileSystem.Path;
+        private static readonly IPath Path = FileSystem.Path;
         private static readonly IFile File = FileSystem.File;
 
         /// <summary>
         /// Markdown HTML header.
         /// </summary>
-        private readonly string htmlHeader = "<!doctype html><style>body{width:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;text-align:left;background-color:#fff}.container{padding:5%}body img{max-width:100%;height:auto}body h1,body h2,body h3,body h4,body h5,body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}body h1,body h2{padding-bottom:.3em;border-bottom:1px solid #eaecef}body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji}body h3{font-size:1.25em}body h4{font-size:1em}body h5{font-size:.875em}body h6{font-size:.85em;color:#6a737d}pre{font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;background-color:#f6f8fa;border-radius:3px;padding:16px;font-size:85%}a{color:#0366d6}strong{font-weight:600}em{font-style:italic}code{padding:.2em .4em;margin:0;font-size:85%;background-color:#f6f8fa;border-radius:3px}hr{border-color:#EEE -moz-use-text-color #FFF;border-style:solid none;border-width:.5px 0;margin:18px 0}table{display:block;width:100%;overflow:auto;border-spacing:0;border-collapse:collapse}tbody{display:table-row-group;vertical-align:middle;border-color:inherit;vertical-align:inherit;border-color:inherit}table tr{background-color:#fff;border-top:1px solid #c6cbd1}tr{display:table-row;vertical-align:inherit;border-color:inherit}table td,table th{padding:6px 13px;border:1px solid #dfe2e5}th{font-weight:600;display:table-cell;vertical-align:inherit;font-weight:bold;text-align:-internal-center}thead{display:table-header-group;vertical-align:middle;border-color:inherit}td{display:table-cell;vertical-align:inherit}code,pre,tt{font-family:SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace;color:#24292e;overflow-x:auto}pre code{font-size:inherit;color:inherit;word-break:normal}blockquote{background-color:#fff;border-radius:3px;padding:15px;font-size:14px;display:block;margin-block-start:1em;margin-block-end:1em;margin-inline-start:40px;margin-inline-end:40px;padding:0 1em;color:#6a737d;border-left:.25em solid #dfe2e5}</style><body><div class=\"container\">";
+        private readonly string htmlHeader = "<!doctype html><html><head><style>body{background:#202020;}</style></head><body>";
 
         /// <summary>
         /// Markdown HTML footer.
         /// </summary>
-        private readonly string htmlFooter = "</div></body></html>";
+        private readonly string htmlFooter = "</body></html>";
 
         /// <summary>
         /// RichTextBox control to display if external images are blocked.
@@ -73,13 +73,30 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
                     throw new ArgumentException($"{nameof(dataSource)} for {nameof(CodeFilePreviewHandler)} must be a string but was a '{typeof(T)}'");
                 }
 
-                string ext = FileSystem.Path.GetExtension(filePath);
+                string ext = Path.GetExtension(filePath);
                 string fileText = File.ReadAllText(filePath);
 
-                HtmlFormatter formatter = new HtmlFormatter();
-                string codeFileHTML = formatter.GetHtmlString(fileText, GetLanguageByExtension(ext));
-                codeFileHTML = htmlHeader + codeFileHTML;
-                codeFileHTML = codeFileHTML + htmlFooter;
+                string codeFileHTML = string.Empty;
+                if (ext.Equals(".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    codeFileHTML = fileText;
+                }
+                else
+                {
+                    HtmlFormatter formatter = new HtmlFormatter(ColorCode.Styling.StyleDictionary.DefaultDark);
+                    codeFileHTML = formatter.GetHtmlString(fileText, GetLanguageByExtension(ext));
+                    codeFileHTML = $"{htmlHeader}{codeFileHTML}{htmlFooter}";
+                }
+
+                /* not work, why? the result of "codeFileHTML" is right. render fail.
+                string lang = GetLangByExtension(ext);
+                string js = File.ReadAllText(@"C:\res\shjs\sh_main.min.js");
+                string jsLang = File.ReadAllText($"C:\\res\\shjs\\lang\\sh_{lang}.min.js");
+                string css = File.ReadAllText(@"C:\res\shjs\css\default.css");
+                string header = $"<!doctype html><html><head><style>{css}</style><script>{js}{jsLang}</script></head><body onload=\"sh_highlightDocument();\">";
+                string footer = "</body></html>";
+                string codeFileHTML = $"{header}<pre class=\"sh_{lang}\">{HttpUtility.HtmlEncode(fileText)}</pre>{footer}";
+                */
 
                 InvokeOnControlThread(() =>
                 {
@@ -96,7 +113,7 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
 
                     if (_infoBarDisplayed)
                     {
-                        _infoBar = GetTextBoxControl(fileText);
+                        _infoBar = GetTextBoxControl(codeFileHTML);
                         Resize += FormResized;
                         Controls.Add(_infoBar);
                     }
@@ -166,28 +183,50 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
             }
         }
 
-        private static ILanguage GetLanguageByExtension(string ext)
+        /*
+        private static string GetLangByExtension(string ext)
         {
             switch (ext)
             {
                 case ".cs":
-                    return Languages.CSharp;
+                    return "csharp";
+                case ".js":
+                    return "javascript";
+                case ".py":
+                    return "python";
+                default:
+                    return ext.Substring(1);
+            }
+        }
+        */
+
+        private static ILanguage GetLanguageByExtension(string ext)
+        {
+            switch (ext)
+            {
                 case ".cpp":
                     return Languages.Cpp;
+                case ".cs":
+                    return Languages.CSharp;
                 case ".css":
                     return Languages.Css;
-                case ".js":
-                    return Languages.JavaScript;
                 case ".java":
                     return Languages.Java;
-                case ".ts":
-                    return Languages.Typescript;
+                case ".js":
+                case ".json":
+                    return Languages.JavaScript;
                 case ".php":
                     return Languages.Php;
                 case ".ps1":
                     return Languages.PowerShell;
+                case ".py":
+                    return Languages.Python;
                 case ".sql":
                     return Languages.Sql;
+                case ".ts":
+                    return Languages.Typescript;
+                case ".xml":
+                    return Languages.Xml;
                 default:
                     return null;
             }

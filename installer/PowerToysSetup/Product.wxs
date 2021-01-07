@@ -464,22 +464,22 @@
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{45769bcc-e8fd-42d0-947e-02beef77a1f5}" />
         </RegistryKey>
         <!-- Add file type association for CodeFile Preview Handler -->
-        <RegistryKey Root="HKCR" Key=".cs\shellex">
+        <RegistryKey Root="HKCR" Key=".cpp\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
-        <RegistryKey Root="HKCR" Key=".cpp\shellex">
+        <RegistryKey Root="HKCR" Key=".cs\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
         <RegistryKey Root="HKCR" Key=".css\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
-        <RegistryKey Root="HKCR" Key=".js\shellex">
-          <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
-        </RegistryKey>
         <RegistryKey Root="HKCR" Key=".java\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
-        <RegistryKey Root="HKCR" Key=".ts\shellex">
+        <RegistryKey Root="HKCR" Key=".js\shellex">
+          <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".json\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
         <RegistryKey Root="HKCR" Key=".php\shellex">
@@ -488,7 +488,16 @@
         <RegistryKey Root="HKCR" Key=".ps1\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".py\shellex">
+          <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
+        </RegistryKey>
         <RegistryKey Root="HKCR" Key=".sql\shellex">
+          <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".ts\shellex">
+          <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
+        </RegistryKey>
+        <RegistryKey Root="HKCR" Key=".xml\shellex">
           <RegistryValue Type="string" Key="{8895b1c6-b41f-4c1c-a562-0d564250836f}" Value="{3DB1B3B5-9C0C-460C-AA0A-787150D490F9}" />
         </RegistryKey>
         <!-- Update Key to use IE11 for prevhost.exe -->
