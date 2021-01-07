@@ -683,6 +683,7 @@
         <File Source="$(var.BinX64Dir)modules\FileExplorerPreview\CodeFilePreviewHandler.deps.json" />
         <File Source="$(var.BinX64Dir)modules\FileExplorerPreview\ColorCode.HTML.dll" />
         <File Source="$(var.BinX64Dir)modules\FileExplorerPreview\ColorCode.Core.dll" />
+        <File Id="Module_FileExplorerPreview_ControlzEX" Source="$(var.BinX64Dir)modules\FileExplorerPreview\ControlzEx.dll" />
       </Component>
     </DirectoryRef>
 

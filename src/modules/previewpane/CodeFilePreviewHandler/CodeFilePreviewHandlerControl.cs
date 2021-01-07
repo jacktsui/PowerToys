@@ -14,6 +14,7 @@ using Microsoft.PowerToys.PreviewHandler.CodeFile.Properties;
 using Microsoft.PowerToys.PreviewHandler.CodeFile.Telemetry.Events;
 using Microsoft.PowerToys.Telemetry;
 using PreviewHandlerCommon;
+using StyleDic = ColorCode.Styling.StyleDictionary;
 
 namespace Microsoft.PowerToys.PreviewHandler.CodeFile
 {
@@ -29,7 +30,7 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
         /// <summary>
         /// Markdown HTML header.
         /// </summary>
-        private readonly string htmlHeader = "<!doctype html><html><head><style>body{background:#202020;}</style></head><body>";
+        private readonly string htmlHeader = "<!doctype html><html><head><style>body{0}</style></head><body>";
 
         /// <summary>
         /// Markdown HTML footer.
@@ -83,9 +84,19 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
                 }
                 else
                 {
-                    HtmlFormatter formatter = new HtmlFormatter(ColorCode.Styling.StyleDictionary.DefaultDark);
+                    StyleDic theme = StyleDic.DefaultLight;
+                    string background = "{background:#FFFFFF;}";
+                    string baseColor = ControlzEx.Theming.WindowsThemeHelper.GetWindowsBaseColor();
+                    if (baseColor == "Dark")
+                    {
+                        theme = StyleDic.DefaultDark;
+                        background = "{background:#202020;}";
+                    }
+
+                    string header = string.Format(System.Globalization.CultureInfo.CurrentCulture, htmlHeader, background);
+                    HtmlFormatter formatter = new HtmlFormatter(theme);
                     codeFileHTML = formatter.GetHtmlString(fileText, GetLanguageByExtension(ext));
-                    codeFileHTML = $"{htmlHeader}{codeFileHTML}{htmlFooter}";
+                    codeFileHTML = $"{header}{codeFileHTML}{htmlFooter}";
                 }
 
                 /* not work, why? the result of "codeFileHTML" is right. render fail.
