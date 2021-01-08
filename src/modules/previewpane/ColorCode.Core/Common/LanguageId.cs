@@ -9,6 +9,7 @@ namespace ColorCode.Common
         public const string Aspx = "aspx";
         public const string AspxCs = "aspx(c#)";
         public const string AspxVb = "aspx(vb.net)";
+        public const string Batch = "batch script";
         public const string CSharp = "c#";
         public const string Cpp = "cpp";
         public const string Css = "css";

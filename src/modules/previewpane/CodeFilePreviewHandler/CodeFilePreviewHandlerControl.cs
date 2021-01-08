@@ -215,6 +215,9 @@ namespace Microsoft.PowerToys.PreviewHandler.CodeFile
         {
             switch (ext)
             {
+                case ".bat":
+                case ".cmd":
+                    return Languages.Batch;
                 case ".cpp":
                     return Languages.Cpp;
                 case ".cs":
